@@ -67,13 +67,13 @@ defineExpose({ refreshMainMenu })
 
 <template>
   <!-- Sidebar (Desktop): Main Column 侧边栏(电脑端):主栏 -->
-  <el-aside
+  <lay-side
     v-if="visible"
     :width="`${collMainMenu ? app.MenuSetting.mainMenu.widthColl : app.MenuSetting.subMenu.collapsed ? app.MenuSetting.mainMenu.widthSingle : app.MenuSetting.mainMenu.width}px`"
     style="height:100vh;border-right:1px solid var(--el-border-color);z-index:1;"
   >
-    <el-container class="h-full">
-      <el-header
+    <lay-layout class="h-full">
+      <lay-header
         :style="{
           backgroundColor: mainMenuInverted ? 'var(--el-bg-color-dark)' : 'transparent',
           padding: 0,
@@ -83,9 +83,9 @@ defineExpose({ refreshMainMenu })
         }"
       >
         <Logo w-full :hide-title="collMainMenu" />
-      </el-header>
+      </lay-header>
       <!-- Main Menu 主栏菜单 -->
-      <el-main class="of-x-hidden! p0!">
+      <lay-body class="of-x-hidden! p0!">
         <el-menu
           v-if="mainMenuKey" class="main-menu h-full! w-full! b-r-none!"
           :background-color="mainMenuInverted ? 'var(--el-bg-color-dark)' : undefined"
@@ -96,8 +96,8 @@ defineExpose({ refreshMainMenu })
             <component :is="menuItem" v-for="menuItem in mainMenuItems" :key="menuItem.key" />
           </template>
         </el-menu>
-      </el-main>
-      <el-footer
+      </lay-body>
+      <lay-footer
         class="h-auto! px-0!"
         :style="`background-color:${mainMenuInverted ? 'var(--el-bg-color-dark)' : 'transparent'};`"
       >
@@ -113,9 +113,9 @@ defineExpose({ refreshMainMenu })
             cursor-pointer text-5 @click="collSubMenu = !collSubMenu"
           />
         </div>
-      </el-footer>
-    </el-container>
-  </el-aside>
+      </lay-footer>
+    </lay-layout>
+  </lay-side>
 </template>
 
 <style scoped lang="scss">

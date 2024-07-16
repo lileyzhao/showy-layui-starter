@@ -63,33 +63,33 @@ defineExpose({ refreshSubMenu })
 
 <template>
   <!-- Sidebar (desktop): Sub-sidebar 侧边栏(电脑端):副栏 -->
-  <el-aside
+  <lay-side
     v-if="visible" :width="`${app.MenuSetting.subMenu.width}px`" class="h-100vh of-x-hidden!"
     style="border-right:1px solid var(--el-border-color);"
   >
-    <el-container class="h-full">
-      <el-header class="h-auto! p-0!" style="border-bottom:1px solid var(--el-border-color);">
+    <lay-layout class="h-full">
+      <lay-header class="h-auto! p-0!" style="border-bottom:1px solid var(--el-border-color);">
         <Logo v-if="visibleLogo" p-l-6 />
         <Logo v-else hide-logo :hide-title="!app.MenuSetting.mainMenu.collapsed" p-l-6 />
-      </el-header>
-      <el-main class="p-0!">
+      </lay-header>
+      <lay-body class="p-0!">
         <!-- Sub-menu 副栏菜单 -->
         <el-menu v-if="subMenuKey" class="sub-menu" unique-opened :default-active="subMenuKey">
           <template #default>
             <component :is="menuItem" v-for="menuItem in subMenuItems" :key="menuItem.key" />
           </template>
         </el-menu>
-      </el-main>
-      <el-footer class="h-auto! px-0!">
+      </lay-body>
+      <lay-footer class="h-auto! px-0!">
         <div h-8 w-full flex justify-right p-r-2>
           <div
             class="i-carbon:side-panel-close cursor-pointer text-5 hover:color-primary"
             @click="collSubMenu = !collSubMenu"
           />
         </div>
-      </el-footer>
-    </el-container>
-  </el-aside>
+      </lay-footer>
+    </lay-layout>
+  </lay-side>
 </template>
 
 <style scoped lang="scss">

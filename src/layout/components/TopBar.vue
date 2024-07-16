@@ -125,7 +125,7 @@ defineExpose({ refreshTopMenu })
 
 <template>
   <!-- Left section of the top bar 头部左侧区 -->
-  <el-header
+  <lay-header
     bordered
     :style="{ background: app.IsDarkMode ? '' : '#fff', padding: 0, height: 'auto', lineHeight: 'auto', borderBottom: `1px solid var(--el-border-color)` }"
   >
@@ -218,7 +218,7 @@ defineExpose({ refreshTopMenu })
         </el-dropdown>
       </div>
     </div>
-  </el-header>
+  </lay-header>
 </template>
 
 <style scoped lang="scss">

@@ -1,29 +1,18 @@
 <script setup lang="ts">
-import zhCn from 'element-plus/es/locale/lang/zh-cn'
-import { useCssVar } from '@vueuse/core'
+import { useAppStore } from '@/store/modules/app'
 
-const themeVars = reactive({
-  colorPrimary: '#646CFF',
-})
+const app = useAppStore()
 
-const primaryColor = useCssVar('--el-color-primary', null, { initialValue: themeVars.colorPrimary })
-primaryColor.value = themeVars.colorPrimary
+const theme = computed(() => app.ThemeMode)
 
-/** Element global config */
-const globalConfig = reactive({
-  size: 'default' as 'default' | 'small' | 'large',
-  zIndex: 3000,
-  locale: zhCn,
-  buttonConfig: { autoInsertSpace: false },
-  messageConfig: { max: 3 },
+const themeVariable = reactive({
+  '--global-primary-color': '#646CFF',
+  // "--global-checked-color":"red"
 })
 </script>
 
 <template>
-  <el-config-provider
-    :size="globalConfig.size" :z-index="globalConfig.zIndex" :locale="globalConfig.locale"
-    :button="globalConfig.buttonConfig" :message="globalConfig.messageConfig"
-  >
+  <lay-config-provider :theme="theme" :theme-variable="themeVariable">
     <router-view />
-  </el-config-provider>
+  </lay-config-provider>
 </template>

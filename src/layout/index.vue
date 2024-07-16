@@ -105,7 +105,7 @@ const handleAction = (op: string, _val: any) => {
 </script>
 
 <template>
-  <el-container has-sider style="min-height: 100vh">
+  <lay-layout has-sider style="min-height: 100vh">
     <!-- Sidebar (Desktop): Main Sidebar. 侧边栏(电脑端):主栏。 -->
     <MainSidebar
       ref="mainSidebarRef" @menu-change="handleMainMenuChange" @mouseenter="cancelRestoreSubMenu"
@@ -117,14 +117,14 @@ const handleAction = (op: string, _val: any) => {
       @mouseleave="stopTimeout = false"
     />
     <!-- Right main area. 右侧主体区。 -->
-    <el-container class="h-100vh flex flex-col!">
+    <lay-layout class="h-100vh flex flex-col!">
       <!-- Top bar area. 头部横栏区。 -->
       <TopBar
         ref="topBarRef" @action="handleAction" @key-change="handleMainMenuChange"
         @mouseenter="cancelRestoreSubMenu" @mouseleave="stopTimeout = false"
       />
       <!-- Content area. 内容区。 -->
-      <el-main id="app-main-content" flex-1 of-y-scroll p-0 @mouseenter="restoreSubMenu">
+      <lay-body id="app-main-content" flex-1 of-y-scroll p-0 @mouseenter="restoreSubMenu">
         <div p-12px>
           <router-view v-slot="{ Component, route: r }">
             <transition name="fade">
@@ -135,13 +135,13 @@ const handleAction = (op: string, _val: any) => {
           </router-view>
         </div>
         <el-backtop target="#app-main-content" :visibility-height="100" />
-      </el-main>
-    </el-container>
+      </lay-body>
+    </lay-layout>
     <!-- Drawer (Mobile). 抽屉栏(手机端)。 -->
     <MobileDrawer ref="mobileDrawerRef" />
     <!-- Theme settings drawer. 主题设置抽屉栏。 -->
     <ThemeDrawer ref="themeDrawerRef" />
-  </el-container>
+  </lay-layout>
 </template>
 
 <style scoped lang="scss">
