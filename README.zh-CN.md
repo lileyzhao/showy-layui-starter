@@ -1,5 +1,5 @@
 <p align='center'>
-  <b>基于 Vue + Vite + Element + UnoCSS 的管理后台UI模板</b>
+  <b>基于 Vue + Vite + Layui + UnoCSS 的管理后台UI模板</b>
   <br>快速创建优美简洁的管理后台UI项目
 </p>
 
@@ -38,7 +38,7 @@
 
 - ⚡️ **Vue 3** - 最新的 Vue 版本
 - 🚀 **Vite** - 超快的开发构建工具
-- 🎨 **Element** - 基于 Vue 3，面向设计师和开发者的组件库
+- 🎨 **Layui** - 基于 Vue 3，面向设计师和开发者的组件库
 - 💅 **UnoCSS** - 高性能且极具灵活性的即时原子化 CSS 引擎
 - 🧹 **ESlint** - 基于[@antfu/eslint-config](https://github.com/antfu/eslint-config)的预置规则库
 
@@ -46,7 +46,7 @@
 
 ### UI 框架
 
-- [Element](https://element-plus.org/) - 基于 Ant Design 和 Vue 3 的企业级 UI 组件库
+- [LayuiVue](https://github.com/layui-vue/layui-vue) - 基于 Ant Design 和 Vue 3 的企业级 UI 组件库
 - [UnoCSS](https://github.com/unocss/unocss) - 高性能且极具灵活性的即时原子化 CSS 引擎
 
 ### 插件
@@ -76,14 +76,14 @@
 
 ### GitHub 模板
 
-[使用这个模板创建仓库](https://github.com/lileyzhao/showy-element-template/generate).
+[使用这个模板创建仓库](https://github.com/lileyzhao/showy-layui-template/generate).
 
 ### 克隆到本地
 
 如果您更喜欢使用更干净的 git 历史记录手动执行此操作
 
 ```bash
-npx degit lileyzhao/showy-element-template your-vue-admin-template
+npx degit lileyzhao/showy-layui-template your-vue-admin-template
 cd your-vue-admin-template
 pnpm i # 如果你没装过 pnpm, 可以先运行: npm install -g pnpm
 ```
