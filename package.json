@@ -30,6 +30,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@layui/layui-vue": "^2.17.7",
     "@unocss/reset": "^0.61.3",
     "@vueuse/core": "^10.11.0",
     "beautify-console-log": "^1.2.3",
