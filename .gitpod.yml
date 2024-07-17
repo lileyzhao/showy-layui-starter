@@ -1,5 +1,5 @@
 ports:
-  - port: 4338
+  - port: 4358
     onOpen: open-preview
 tasks:
   - init: pnpm run install

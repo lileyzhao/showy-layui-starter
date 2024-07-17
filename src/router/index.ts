@@ -1,14 +1,14 @@
 import type { App } from 'vue'
 import type { RouteRecordRaw } from 'vue-router'
 import { createRouter, createWebHistory } from 'vue-router'
-import { i18n } from '../modules/i18n'
+import { useI18n } from 'vue-i18n'
 import { createRouterGuards } from './guard'
 import { dynamicImport } from './helper'
 import type { MenuRecord } from '@/apis/menuApi'
 import { getMenuData } from '@/apis/menuApi'
 
 /** 路由Path中的区域参数 */
-export const LOCALE_PARAM = '/:lang([a-z]{2}-[A-Za-z]{2})?'
+export const LOCALE_PARAM = '/:lang([a-z]{2}[-_][A-Za-z]{2})?'
 
 /**
  * What is its function? Mainly used to work with the i18n Ally plugin to display the corresponding translation.
@@ -158,8 +158,10 @@ export async function setupRouter(app: App<Element>) {
   // Create router guards. 创建路由守卫。
   createRouterGuards(router)
 
-  // Set page title. 设置页面标题。
-  router.afterEach((to) => {
-    document.title = `${i18n.global.t((to?.meta?.title as string) ?? '')} | ${import.meta.env.VITE_APP_TITLE}`
-  })
+  // const { t } = useI18n()
+
+  // // Set page title. 设置页面标题。
+  // router.afterEach((to) => {
+  //   document.title = `${t((to?.meta?.title as string) ?? '')} | ${import.meta.env.VITE_APP_TITLE}`
+  // })
 }

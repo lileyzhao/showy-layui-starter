@@ -4,7 +4,7 @@ import { useAppStore } from '@/store'
 import { MENU_STATE_TEXT, MenuButtonEnum } from '@/shared'
 import ActionIcon from '@/layout/components/ActionIcon.vue'
 import { mapRoutesToElMenuItem } from '@/utils/menuUtil'
-import { availableLocales } from '@/modules/i18n'
+import { availableLocales } from '@/utils/i18nUtil'
 import { getFullRoutes } from '@/utils'
 
 const emit = defineEmits(['action', 'keyChange'])

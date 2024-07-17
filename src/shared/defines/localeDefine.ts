@@ -25,6 +25,6 @@ export interface LocaleSetting {
  * @constant Available locale enum. 可选的区域枚举。
  */
 export enum LocaleEnum {
-  zhCN = 'zh-CN',
-  enUS = 'en-US',
+  zhCN = 'zh_CN',
+  enUS = 'en_US',
 }

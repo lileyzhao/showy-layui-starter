@@ -1,5 +1,5 @@
 import type { Router } from 'vue-router'
-import { availableLocales } from '@/modules/i18n'
+import { availableLocales } from '@/utils/i18nUtil'
 import { useAppStore } from '@/store'
 import { LocaleEnum } from '@/shared'
 

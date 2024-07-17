@@ -1,7 +1,7 @@
 welcome:
   morning: 日安，朝气少年
   night: 夜安，玛卡巴卡
-author: 绣雨
+author: 秀雨
 team: 西江绣雨
 intro: 撒旦的女儿动了心，走的时候也红了眼，爱上了哪个穿着白衬衫的男孩，妄想着成为人类，便是禁忌。
 login:
@@ -29,7 +29,7 @@ theme:
     title: 主题模式
     light: 浅色
     dark: 深色
-    system: 系统
+    system: 跟随系统
 page:
   about:
     title: 关于

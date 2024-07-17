@@ -104,7 +104,7 @@ Then, enjoy :)
 
 ### Development
 
-To see it in action at http://localhost:4338, just run:
+To see it in action at http://localhost:4358, just run:
 
 ```bash
 pnpm i

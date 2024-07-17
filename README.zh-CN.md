@@ -104,7 +104,7 @@ pnpm i # 如果你没装过 pnpm, 可以先运行: npm install -g pnpm
 
 ### 开发
 
-只需要执行以下命令就可以在 http://localhost:4338 中看到
+只需要执行以下命令就可以在 http://localhost:4358 中看到
 
 ```bash
 pnpm i
