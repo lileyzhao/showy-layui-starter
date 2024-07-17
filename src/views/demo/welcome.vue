@@ -20,7 +20,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <el-card class="m--8px! b-0!" shadow="never" :body-style="{ padding: 0 }">
+  <lay-card class="m--12px! b-0! b-rd-0!" shadow="never">
     <div flex flex-col items-center justify-center gap-y-4 pt-4>
       <div
         :class="`i-line-md:${app.IsDarkMode ? 'moon-filled-loop text-purple' : 'sunny-filled-loop text-yellow'}`"
@@ -35,33 +35,30 @@ onMounted(() => {
       <div decoration-underline>
         {{ route?.path }}
       </div>
-      <el-space>
-        <el-date-picker type="date" w-48 />
-        <el-time-picker w-48 />
-      </el-space>
+      <lay-space>
+        <lay-date-picker allow-clear w-48 />
+        <lay-date-picker type="time" allow-clear w-48 />
+      </lay-space>
     </div>
     <div class="m-4 text-center">
-      <el-button>Default</el-button>
-      <el-button type="primary">
+      <lay-button>Default</lay-button>
+      <lay-button type="primary">
         Primary
-      </el-button>
-      <el-button type="success">
-        Success
-      </el-button>
-      <el-button type="info">
-        Info
-      </el-button>
-      <el-button type="warning">
-        Warning
-      </el-button>
-      <el-button type="danger">
+      </lay-button>
+      <lay-button type="normal">
+        Normal
+      </lay-button>
+      <lay-button type="warm">
+        Warm
+      </lay-button>
+      <lay-button type="danger">
         Danger
-      </el-button>
+      </lay-button>
     </div>
     <div class="h-380vh flex flex-col items-center justify-end pb-4 text-4">
       ... {{ t('intro') }} ...
     </div>
-  </el-card>
+  </lay-card>
 </template>
 
 <style scoped lang="scss">

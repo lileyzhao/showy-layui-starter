@@ -1,13 +1,7 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useAppStore } from '@/store/modules/app'
 import pkg from '@/../package.json'
 
-const app = useAppStore()
-
 const { t } = useI18n()
-
-const column = computed(() => (app.isMobile ? 1 : 2))
 
 interface PkgJson {
   name: string
@@ -43,54 +37,77 @@ const latestBuildTime = BUILD_TIME
 </script>
 
 <template>
-  <el-card content-class="!p-8px" class="m--8px! border-none!" shadow="never" :body-style="{ padding: 0 }">
-    <el-space direction="vertical" :size="14" fill w-full>
-      <el-card :header="t('page.about.title')" :bordered="false" size="small" segmented class="card-wrapper">
+  <lay-card class="border-none!" shadow="never">
+    <lay-space direction="vertical" :size="14" fill w-full>
+      <lay-field :title="t('page.about.title')">
         <p>{{ t('page.about.introduction') }}</p>
-      </el-card>
-      <el-card
-        :header="t('page.about.projectInfo.title')" :bordered="false" size="small" segmented
-        class="card-wrapper"
-      >
-        <el-descriptions border size="small" :column="column">
-          <el-descriptions-item :label="t('page.about.projectInfo.version')">
-            <el-tag type="primary">
-              {{ pkgJson.version }}
-            </el-tag>
-          </el-descriptions-item>
-          <el-descriptions-item :label="t('page.about.projectInfo.latestBuildTime')">
-            <el-tag type="primary">
-              {{ latestBuildTime }}
-            </el-tag>
-          </el-descriptions-item>
-          <el-descriptions-item :label="t('page.about.projectInfo.githubLink')">
-            <el-link :href="pkg.homepage" target="_blank" rel="noopener noreferrer" type="primary">
+      </lay-field>
+      <lay-card :title="t('page.about.projectInfo.title')">
+        <div class="descriptions">
+          <div class="description-item">
+            <label>{{ t('page.about.projectInfo.version') }}</label>
+            <span color-primary>{{ pkgJson.version }}</span>
+          </div>
+          <div class="description-item">
+            <label>{{ t('page.about.projectInfo.latestBuildTime') }}</label>
+            <span color-primary>{{ latestBuildTime }}</span>
+          </div>
+          <div class="description-item">
+            <label>{{ t('page.about.projectInfo.githubLink') }}</label>
+            <a :href="pkg.homepage" target="_blank" rel="noopener noreferrer" color-primary>
               {{ t('page.about.projectInfo.githubLink') }}
-            </el-link>
-          </el-descriptions-item>
-          <el-descriptions-item :label="t('page.about.projectInfo.previewLink')">
-            <el-link :href="pkg.homepage" target="_blank" rel="noopener noreferrer" type="primary">
+            </a>
+          </div>
+          <div class="description-item">
+            <label>{{ t('page.about.projectInfo.previewLink') }}</label>
+            <a :href="pkg.homepage" target="_blank" rel="noopener noreferrer" color-primary>
               {{ t('page.about.projectInfo.previewLink') }}
-            </el-link>
-          </el-descriptions-item>
-        </el-descriptions>
-      </el-card>
-      <el-card :header="t('page.about.prdDep')" :bordered="false" size="small" segmented class="card-wrapper">
-        <el-descriptions label-placement="left" border size="small" :column="column">
-          <el-descriptions-item v-for="item in pkgJson.dependencies" :key="item.name" :label="item.name">
-            {{ item.version }}
-          </el-descriptions-item>
-        </el-descriptions>
-      </el-card>
-      <el-card :header="t('page.about.devDep')" :bordered="false" size="small" segmented class="card-wrapper">
-        <el-descriptions label-placement="left" border size="small" :column="column">
-          <el-descriptions-item v-for="item in pkgJson.devDependencies" :key="item.name" :label="item.name">
-            {{ item.version }}
-          </el-descriptions-item>
-        </el-descriptions>
-      </el-card>
-    </el-space>
-  </el-card>
+            </a>
+          </div>
+        </div>
+      </lay-card>
+      <lay-card :title="t('page.about.prdDep')">
+        <div class="descriptions">
+          <div v-for="item in pkgJson.dependencies" :key="item.name" class="description-item">
+            <label>{{ item.name }}</label>
+            <span>{{ item.version }}</span>
+          </div>
+        </div>
+      </lay-card>
+      <lay-card :title="t('page.about.devDep')">
+        <div class="descriptions">
+          <div v-for="item in pkgJson.devDependencies" :key="item.name" class="description-item">
+            <label>{{ item.name }}</label>
+            <span>{{ item.version }}</span>
+          </div>
+        </div>
+      </lay-card>
+    </lay-space>
+  </lay-card>
 </template>
 
-<style scoped></style>
+<style scoped lang="scss">
+.descriptions {
+  --uno: 'flex flex-wrap';
+
+  .description-item {
+    --uno: 'w-50% h-13 lh-13 flex';
+
+    label {
+      --uno: 'block w-30% bg-white! pl-2 flex-1 font-bold';
+      background-color: red;
+    }
+
+    a,
+    span {
+      --uno: 'flex-1';
+    }
+  }
+
+  @media (max-width: 640px) {
+    .description-item {
+      --uno: 'w-100%';
+    }
+  }
+}
+</style>

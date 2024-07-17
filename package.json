@@ -1,23 +1,23 @@
 {
-  "name": "showy-element-template",
+  "name": "showy-layui-template",
   "type": "module",
   "version": "0.1.0-alpha",
   "private": true,
   "packageManager": "pnpm@9.5.0",
-  "description": "An admin dashboard UI template based on Vue 3, Vite, Element, and UnoCSS. 基于 Vue 3、Vite、Element 和 UnoCSS 的管理后台UI模板。",
+  "description": "An admin dashboard UI template based on Vue 3, Vite, Layui, and UnoCSS. 基于 Vue 3、Vite、Layui 和 UnoCSS 的管理后台UI模板。",
   "author": "lileyzhao@gmail.com",
   "license": "MIT",
-  "homepage": "https://github.com/lileyzhao/showy-element-template",
+  "homepage": "https://github.com/lileyzhao/showy-layui-template",
   "repository": {
-    "url": "https://github.com/lileyzhao/showy-element-template.git"
+    "url": "https://github.com/lileyzhao/showy-layui-template.git"
   },
   "bugs": {
-    "url": "https://github.com/lileyzhao/showy-element-template/issues"
+    "url": "https://github.com/lileyzhao/showy-layui-template/issues"
   },
   "engines": {
     "node": ">=20.0.0"
   },
-  "website": "https://element-template.git.showyou.dev",
+  "website": "https://layui-template.git.showyou.dev",
   "scripts": {
     "dev": "pnpm vite",
     "build": "pnpm vite build",
