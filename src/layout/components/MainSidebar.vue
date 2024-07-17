@@ -71,16 +71,16 @@ defineExpose({ refreshMainMenu })
   <lay-side
     v-if="visible"
     :width="`${collMainMenu ? app.MenuSetting.mainMenu.widthColl : app.MenuSetting.subMenu.collapsed ? app.MenuSetting.mainMenu.widthSingle : app.MenuSetting.mainMenu.width}px`"
-    style="height:100vh;border-right:1px solid var(--el-border-color);z-index:1;"
+    style="height:100vh;border-right:1px solid var(--lay-border-color);z-index:1;"
   >
     <lay-layout class="h-full">
       <lay-header
         :style="{
-          backgroundColor: mainMenuInverted ? 'var(--el-bg-color-dark)' : 'transparent',
+          backgroundColor: mainMenuInverted ? 'var(--lay-bg-color-dark)' : 'transparent',
           padding: 0,
           height: 'auto',
           lineHeight: 'auto',
-          borderBottom: mainMenuInverted && !app.IsDarkMode ? '1px solid var(--el-border-color-dark)' : `1px solid var(--el-border-color)`,
+          borderBottom: mainMenuInverted && !app.IsDarkMode ? '1px solid var(--lay-border-color-dark)' : `1px solid var(--lay-border-color)`,
         }"
       >
         <Logo w-full :hide-title="collMainMenu" />
@@ -99,7 +99,7 @@ defineExpose({ refreshMainMenu })
       </lay-body>
       <lay-footer
         class="h-auto! px-0!"
-        :style="`background-color:${mainMenuInverted ? 'var(--el-bg-color-dark)' : 'transparent'};`"
+        :style="`background-color:${mainMenuInverted ? 'var(--lay-bg-color-dark)' : 'transparent'};`"
       >
         <div :class="`h-8 ${collMainMenu ? 'flex justify-around' : 'relative w-full'}`">
           <div

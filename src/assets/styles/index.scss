@@ -43,3 +43,13 @@ html.dark {
   color: rgba(255, 255, 255, 0.87);
   background-color: #18181c;
 }
+
+:root {
+  /* Modify the underline and background color for dark theme here. 在此处修改下划线和深色主题下的背景色 */
+  --lay-border-color: #efeff5 !important;
+  --lay-border-color-dark: rgb(255 255 255 / 9%) !important;
+  --lay-bg-color-dark: #18181c !important;
+}
+.dark {
+  --lay-border-color: var(--lay-border-color-dark) !important;
+}

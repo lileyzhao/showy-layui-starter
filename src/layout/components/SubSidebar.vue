@@ -66,10 +66,10 @@ defineExpose({ refreshSubMenu })
   <!-- Sidebar (desktop): Sub-sidebar 侧边栏(电脑端):副栏 -->
   <lay-side
     v-if="visible" :width="`${app.MenuSetting.subMenu.width}px`" class="h-100vh of-x-hidden!"
-    style="border-right:1px solid var(--el-border-color);"
+    style="border-right:1px solid var(--lay-border-color);"
   >
     <lay-layout class="h-full">
-      <lay-header class="h-auto! p-0!" style="border-bottom:1px solid var(--el-border-color);">
+      <lay-header class="h-auto! p-0!" style="border-bottom:1px solid var(--lay-border-color);">
         <Logo v-if="visibleLogo" p-l-6 />
         <Logo v-else hide-logo :hide-title="!app.MenuSetting.mainMenu.collapsed" p-l-6 />
       </lay-header>

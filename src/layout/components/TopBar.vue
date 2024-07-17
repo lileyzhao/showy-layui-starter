@@ -133,7 +133,7 @@ defineExpose({ refreshTopMenu })
   <!-- Left section of the top bar 头部左侧区 -->
   <lay-header
     bordered
-    :style="{ background: app.IsDarkMode ? '' : '#fff', padding: 0, height: 'auto', lineHeight: 'auto', borderBottom: `1px solid var(--el-border-color)` }"
+    :style="{ background: app.IsDarkMode ? '' : '#fff', padding: 0, height: 'auto', lineHeight: 'auto', borderBottom: `1px solid var(--lay-border-color)` }"
   >
     <div h-header flex-right-center gap-x-4>
       <!-- Left section of the top bar 头部左侧区 -->
@@ -142,7 +142,7 @@ defineExpose({ refreshTopMenu })
         <span v-if="!app.isMobile" font-size-3 text-gray>←{{ t(MENU_STATE_TEXT[menuSetting.menuState!]) }}</span>
       </div>
       <!-- Top logo 顶栏Logo -->
-      <Logo v-if="visible.logo" flex-nowrap px-28px style="border-right: 1px solid var(--el-border-color);" />
+      <Logo v-if="visible.logo" flex-nowrap px-28px style="border-right: 1px solid var(--lay-border-color);" />
       <!-- Top menu 顶栏菜单 -->
       <div flex-1>
         <lay-menu
