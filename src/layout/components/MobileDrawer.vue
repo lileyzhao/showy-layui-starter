@@ -45,13 +45,13 @@ defineExpose({ show })
 </script>
 
 <template>
-  <el-drawer
-    v-if="app.isMobile" v-model="drawerActive" class="mobile-drawer" :size="menuSetting.mainMenu.widthMobile"
-    direction="ltr" :with-header="false"
+  <lay-layer
+    v-if="app.isMobile" v-model="drawerActive" :type="4" offset="l" :close-btn="false" :title="false"
+    :area="`${menuSetting.mainMenu.widthMobile}px`"
   >
     <template #footer>
       <div w-full>
-        <el-button>Footer</el-button>
+        <lay-button>Footer</lay-button>
       </div>
     </template>
     <div style="border-bottom:1px solid rgba(255, 255, 255, 0.09);padding-left: 12px">
@@ -68,11 +68,5 @@ defineExpose({ show })
         cursor-pointer text-18px @click="mainMenuInverted = !mainMenuInverted"
       />
     </div>
-  </el-drawer>
+  </lay-layer>
 </template>
-
-<style>
-.mobile-drawer .el-drawer__body {
-  --uno: 'p-0!';
-}
-</style>

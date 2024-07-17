@@ -36,22 +36,29 @@ defineExpose({ show })
 </script>
 
 <template>
-  <el-drawer v-if="!app.isMobile" v-model="drawerActive" force-render :width="325" :title="t('theme.themeDrawerTitle')" :closable="false">
-    <el-divider content-position="left" border-style="dashed">
-      {{ t('theme.themeMode.title') }}
-    </el-divider>
-    <div class="flex-col-stretch gap-16px">
+  <lay-layer
+    v-if="!app.isMobile" v-model="drawerActive" :type="4" offset="r" :close-btn="false"
+    :title="t('theme.themeDrawerTitle')" area="325px"
+  >
+    <div my-7>
+      <lay-line content-position="left" border-style="dashed">
+        {{ t('theme.themeMode.title') }}
+      </lay-line>
+    </div>
+    <div class="flex-col-stretch gap-16px pl-6">
       <div class="i-flex-center">
-        <el-radio-group v-model="themeModeRaw">
+        <lay-radio-group v-model="themeModeRaw" name="action">
           <template v-for="(_, key) in icons" :key="key">
-            <el-radio-button :label="t(texts[key])" :value="key" />
+            <lay-radio-button :value="key" size="sm">
+              {{ t(texts[key]) }}
+            </lay-radio-button>
           </template>
-        </el-radio-group>
+        </lay-radio-group>
       </div>
       <div v-if="app.ThemeModeRaw !== ThemeModeEnum.DARK" m-y-12px flex-y-center gap-8px>
         <span>深色侧边栏</span>
-        <el-switch v-model="mainMenuInverted" />
+        <lay-switch v-model="mainMenuInverted" />
       </div>
     </div>
-  </el-drawer>
+  </lay-layer>
 </template>
