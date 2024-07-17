@@ -94,6 +94,7 @@ const profileOptions = computed(() => [
 ])
 
 const profileSelect = (info: any) => {
+  console.log('profileSelect', info)
   switch (info.key) {
     case 'profile':
       router.push('/profile')

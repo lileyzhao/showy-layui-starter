@@ -134,7 +134,7 @@ const handleAction = (op: string, _val: any) => {
             </transition>
           </router-view>
         </div>
-        <el-backtop target="#app-main-content" :visibility-height="100" />
+        <lay-backtop target="#app-main-content" :show-height="100" size="small" />
       </lay-body>
     </lay-layout>
     <!-- Drawer (Mobile). 抽屉栏(手机端)。 -->
