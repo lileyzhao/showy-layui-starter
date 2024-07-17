@@ -3,7 +3,7 @@ import Logo from '@/layout/components/Logo.vue'
 import { useAppStore } from '@/store'
 import { MENU_STATE_TEXT, MenuButtonEnum } from '@/shared'
 import ActionIcon from '@/layout/components/ActionIcon.vue'
-import { mapRoutesToElMenuItem } from '@/utils/menuUtil'
+import { mapRoutesToLayMenuItem } from '@/utils/menuUtil'
 import { availableLocales } from '@/utils/i18nUtil'
 import { getFullRoutes } from '@/utils'
 
@@ -28,7 +28,7 @@ const topMenuKey = ref<string | undefined>()
 /** Top menu items 顶栏菜单项 */
 const topMenuItems = computed(() => {
   const routers = fullRoutes.filter(route => route.meta.parentName === 'root').filter(route => !route.meta?.hidden) ?? []
-  return routers.map(route => mapRoutesToElMenuItem(route, fullRoutes, t, !menuSetting.value.topMenu.showSubMenu))
+  return routers.map(route => mapRoutesToLayMenuItem(route, fullRoutes, t, !menuSetting.value.topMenu.showSubMenu))
 })
 
 /** Menu state switch icon 菜单状态切换图标 */
@@ -88,8 +88,10 @@ const profileOptions = computed(() => [
       avatar: 'https://07akioni.oss-cn-beijing.aliyuncs.com/demo1.JPG',
     },
   },
+  { key: 'profile-line', type: 'divider' },
   { key: 'profile', icon: 'i-carbon:user-avatar-filled-alt', label: t('profileMenu.profile'), divided: true },
   { key: 'settings', icon: 'i-carbon:settings', label: t('profileMenu.settings') },
+  { key: 'logout-line', type: 'divider' },
   { key: 'logout', icon: 'i-carbon:logout', label: t('profileMenu.logout'), divided: true },
 ])
 
@@ -143,14 +145,14 @@ defineExpose({ refreshTopMenu })
       <Logo v-if="visible.logo" flex-nowrap px-28px style="border-right: 1px solid var(--el-border-color);" />
       <!-- Top menu 顶栏菜单 -->
       <div flex-1>
-        <el-menu
-          v-if="visible.menu" mode="horizontal" class="top-menu b-b-none!" :default-active="topMenuKey"
-          @select="onTopMenuKeyChange"
+        <lay-menu
+          v-if="visible.menu" v-model:selectedKey="topMenuKey" class="top-menu w-full!" theme="light"
+          @change-selected-key="onTopMenuKeyChange"
         >
           <template #default>
             <component :is="menuItem" v-for="menuItem in topMenuItems" :key="menuItem.key" />
           </template>
-        </el-menu>
+        </lay-menu>
       </div>
       <!-- Right section of the top bar 头部右侧区 -->
       <div h-full flex-right-center p-r-3>
@@ -168,21 +170,18 @@ defineExpose({ refreshTopMenu })
           icon-class="dark:i-line-md:sunny-filled i-line-md:moon-filled" hover-class-dark="text-yellow!"
           @click="app.toggleThemeMode"
         />
-        <el-dropdown
-          v-if="app.LocaleSetting.showButton && langs.length > 2" trigger="click"
-          @command="(command) => toggleLanguage(command as string)"
-        >
-          <div flex-y-center>
+        <lay-dropdown v-if="app.LocaleSetting.showButton && langs.length > 1" update-at-scroll>
+          <lay-button>
             <ActionIcon button icon-class="i-carbon:language" />
-          </div>
-          <template #dropdown>
-            <el-dropdown-menu>
-              <el-dropdown-item v-for="lang in langs" :key="lang.key" :command="lang.key">
+          </lay-button>
+          <template #content>
+            <lay-dropdown-menu>
+              <lay-dropdown-menu-item v-for="lang in langs" :key="lang.key">
                 {{ lang.label }}
-              </el-dropdown-item>
-            </el-dropdown-menu>
+              </lay-dropdown-menu-item>
+            </lay-dropdown-menu>
           </template>
-        </el-dropdown>
+        </lay-dropdown>
         <ActionIcon
           v-if="app.LocaleSetting.showButton && langs.length === 2" button icon-class="i-carbon:language"
           @click="toggleLanguage"
@@ -192,16 +191,15 @@ defineExpose({ refreshTopMenu })
           icon-class="i-carbon:cookie" @click="toggleThemeDrawer"
         />
         <!-- profile 个人资料 -->
-        <el-dropdown trigger="click" @command="profileSelect">
+        <lay-dropdown>
           <ActionIcon button icon-class="i-carbon:user-avatar text-6" :text="t('author')" />
-          <template #dropdown>
-            <el-dropdown-menu>
+          <template #content>
+            <lay-dropdown-menu>
               <template v-for="item in profileOptions" :key="item.key">
-                <!-- <el-menu-divider v-if="item.type === 'divider'" :key="item.key" /> -->
-                <el-dropdown-item v-if="item.type !== 'divider'" :key="item.key" :divided="item.divided">
+                <lay-dropdown-menu-item v-if="item.type !== 'divider'" :key="item.key" :divided="item.divided">
                   <template v-if="item.type === 'header'">
                     <div mt-2 flex gap-2>
-                      <el-avatar :src="item.meta?.avatar" :size="40" mt-1 />
+                      <lay-avatar :src="item.meta?.avatar" radius size="lg" mt-1 />
                       <div w-160px>
                         <div>
                           {{ item.meta?.name }}
@@ -215,22 +213,41 @@ defineExpose({ refreshTopMenu })
                   <template v-else>
                     {{ item.label }}
                   </template>
-                </el-dropdown-item>
+                </lay-dropdown-menu-item>
+                <lay-line v-else />
               </template>
-            </el-dropdown-menu>
+            </lay-dropdown-menu>
           </template>
-        </el-dropdown>
+        </lay-dropdown>
       </div>
     </div>
   </lay-header>
 </template>
 
 <style scoped lang="scss">
-:deep(.top-menu.el-menu) {
-  --uno: 'h-header';
-
-  .el-menu-item {
+:deep(.top-menu.layui-nav) {
+  .layui-nav-item {
     --uno: 'h-header lh-header';
+
+    > a {
+      --uno: 'pl-6! pr-8!';
+      display: flex;
+
+      span {
+        display: flex;
+        align-items: center;
+
+        a {
+          display: flex;
+          align-items: center;
+        }
+
+        span {
+          display: inline-block;
+          padding-left: 11.5px;
+        }
+      }
+    }
   }
 }
 </style>

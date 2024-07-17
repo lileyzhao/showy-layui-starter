@@ -1,5 +1,4 @@
 import { createApp } from 'vue'
-import 'element-plus/theme-chalk/dark/css-vars.css'
 import '@unocss/reset/tailwind.css'
 import 'virtual:uno.css'
 import '@/assets/styles/index.scss'

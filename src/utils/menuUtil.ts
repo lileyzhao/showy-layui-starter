@@ -1,5 +1,5 @@
 import { type RouteRecordNormalized, type RouteRecordRaw, RouterLink } from 'vue-router'
-import { ElMenuItem, ElSubMenu } from 'element-plus'
+import { LayMenuItem, LaySubMenu } from '@layui/layui-vue'
 import type { MenuSetting } from '@/shared'
 
 /**
@@ -12,7 +12,7 @@ import type { MenuSetting } from '@/shared'
  * @param loadChild Whether to load child menus 是否加载子菜单
  * @returns Mapped menu option 映射的菜单项
  */
-export function mapRoutesToElMenuItem(
+export function mapRoutesToLayMenuItem(
   route: RouteRecordRaw,
   fullRoutes: RouteRecordNormalized[],
   t: (x: string) => string,
@@ -22,25 +22,25 @@ export function mapRoutesToElMenuItem(
   if (childRoutes.length > 0) {
     if (loadChild) {
       return h(
-        ElSubMenu,
-        { index: route.name as string },
+        LaySubMenu,
+        { id: route.name as string },
         {
-          default: () => childRoutes.map(childRoute => mapRoutesToElMenuItem(childRoute, fullRoutes, t)),
+          default: () => childRoutes.map(childRoute => mapRoutesToLayMenuItem(childRoute, fullRoutes, t)),
           title: () => [
             h('i', { class: `el-icon ${route.meta?.icon}` }),
-            h('span', { class: 'text' }, `${t((route.meta?.title || route.name || route.path) as string)}`),
+            h('span', { class: 'text pl-3' }, `${t((route.meta?.title || route.name || route.path) as string)}`),
           ],
         },
       )
     }
     else {
       return h(
-        ElMenuItem,
-        { index: route.name as string },
+        LayMenuItem,
+        { id: route.name as string },
         {
           default: () => [
             h('i', { class: `el-icon ${route.meta?.icon}` }),
-            h('span', { class: 'text' }, `${t((route.meta?.title || route.name || route.path) as string)}`),
+            h('span', { class: 'text pl-3' }, `${t((route.meta?.title || route.name || route.path) as string)}`),
           ],
         },
       )
@@ -48,17 +48,17 @@ export function mapRoutesToElMenuItem(
   }
   else {
     return h(
-      ElMenuItem,
-      { index: route.name as string },
+      LayMenuItem,
+      { id: route.name as string },
       {
         default: () =>
           h(
             RouterLink,
-            { to: { path: route.path }, class: 'flex-y-center' },
+            { to: { path: route.path }, class: 'w-full flex-y-center' },
             {
               default: () => [
                 h('i', { class: `el-icon ${route.meta?.icon}` }),
-                h('span', { class: 'text' }, `${t((route.meta?.title || route.name || route.path) as string)}`),
+                h('span', { class: 'text pl-3' }, `${t((route.meta?.title || route.name || route.path) as string)}`),
               ],
             },
           ),
@@ -78,7 +78,7 @@ export function mapRoutesToElMenuItem(
  * @param mainMenuSetting Main menu settings 主菜单配置
  * @returns Mapped main menu option 映射的主菜单项
  */
-export function mapRoutesToElMenuItemMain(
+export function mapRoutesToLayMenuItemMain(
   route: RouteRecordRaw,
   fullRoutes: RouteRecordNormalized[],
   t: (x: string) => string,
@@ -112,10 +112,10 @@ export function mapRoutesToElMenuItemMain(
   }
 
   if (childRoutes.length > 0 && loadChild) {
-    const menuSubChild = childRoutes.map(childRoute => mapRoutesToElMenuItem(childRoute, fullRoutes, t))
+    const menuSubChild = childRoutes.map(childRoute => mapRoutesToLayMenuItem(childRoute, fullRoutes, t))
     return h(
-      ElSubMenu,
-      { index: route.name as string, class: mainMenuSetting.collapsed && mainMenuSetting.showLabel ? 'p-0! h-auto!' : '' },
+      LaySubMenu,
+      { id: route.name as string, class: mainMenuSetting.collapsed && mainMenuSetting.showLabel ? 'p-0! h-auto!' : '' },
       {
         default: () => menuSubChild,
         title: () => getIconText(route),
@@ -124,9 +124,9 @@ export function mapRoutesToElMenuItemMain(
   }
   else {
     const vMenuItem = h(
-      ElMenuItem,
+      LayMenuItem,
       {
-        index: route.name as string,
+        id: route.name as string,
         class: mainMenuSetting.collapsed && mainMenuSetting.showLabel ? 'p-0! h-auto!' : 'h-auto!',
       },
       { default: () => getIconText(route) },

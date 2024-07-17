@@ -26,11 +26,11 @@ const iconClass = computed(() => `${defaultIconClass} ${props.class ?? ''} ${pro
 </script>
 
 <template>
-  <el-button v-if="props.button" text checkable size="large" :class="buttonClass">
+  <lay-button v-if="props.button" text checkable :class="buttonClass">
     <div flex-y-center flex-row gap-x-2>
       <div :class="iconClass" />
       <span v-if="text" :class="props.textClass">{{ props.text }}</span>
     </div>
-  </el-button>
+  </lay-button>
   <div v-else :class="iconClass" hover:color-primary />
 </template>

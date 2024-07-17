@@ -1,7 +1,7 @@
 <script setup lang="ts" name="Layout-MainSidebar">
 import Logo from '@/layout/components/Logo.vue'
 import { useAppStore } from '@/store'
-import { mapRoutesToElMenuItemMain } from '@/utils/menuUtil'
+import { mapRoutesToLayMenuItemMain } from '@/utils/menuUtil'
 import { getFullRoutes } from '@/utils'
 
 const emit = defineEmits(['menuChange'])
@@ -14,6 +14,7 @@ const mainMenuRoutes = fullRoutes.filter(route => route.meta.parentName === 'roo
 
 /** Selected Item in main-menu 主栏菜单选中项 */
 const mainMenuKey = ref<string>()
+const mainMenuOpenKeys = ref([])
 
 /** Collapsed State of main-menu 主栏菜单收缩状态 */
 const collMainMenu = computed({
@@ -38,7 +39,7 @@ const mainMenuInverted = computed({
 
 /** main-menu item 主栏菜单项 */
 const mainMenuItems = computed(() => {
-  return mainMenuRoutes.map(route => mapRoutesToElMenuItemMain(route, fullRoutes, t, app.MenuSetting.subMenu.collapsed, app.MenuSetting.mainMenu))
+  return mainMenuRoutes.map(route => mapRoutesToLayMenuItemMain(route, fullRoutes, t, app.MenuSetting.subMenu.collapsed, app.MenuSetting.mainMenu))
 })
 
 /** Handle main menu key change 处理主菜单键变化 */
@@ -86,16 +87,15 @@ defineExpose({ refreshMainMenu })
       </lay-header>
       <!-- Main Menu 主栏菜单 -->
       <lay-body class="of-x-hidden! p0!">
-        <el-menu
-          v-if="mainMenuKey" class="main-menu h-full! w-full! b-r-none!"
-          :background-color="mainMenuInverted ? 'var(--el-bg-color-dark)' : undefined"
-          :text-color="mainMenuInverted ? '#bbb' : undefined" unique-opened :default-active="mainMenuKey"
-          :collapse="collMainMenu && collSubMenu" @select="handleMainMenuChange"
+        <lay-menu
+          v-if="mainMenuKey" v-model:selectedKey="mainMenuKey" v-model:open-keys="mainMenuOpenKeys"
+          class="main-menu h-full! w-full!" :collapse="collMainMenu" :tree="true" indent
+          theme="light" @change-selected-key="handleMainMenuChange"
         >
           <template #default>
             <component :is="menuItem" v-for="menuItem in mainMenuItems" :key="menuItem.key" />
           </template>
-        </el-menu>
+        </lay-menu>
       </lay-body>
       <lay-footer
         class="h-auto! px-0!"
@@ -119,9 +119,29 @@ defineExpose({ refreshMainMenu })
 </template>
 
 <style scoped lang="scss">
-.main-menu {
-  :deep(.el-sub-menu__title) {
-    --uno: 'h-auto!';
+:deep(.main-menu.layui-nav) {
+  .layui-nav-item > a {
+    padding: 0;
+    display: flex;
+
+    span {
+      --uno: 'flex-1 m-0';
+      display: flex;
+      align-items: center;
+      padding-left: 23px;
+      a {
+        display: flex;
+        align-items: center;
+      }
+
+      span {
+        display: inline-block;
+        padding-left: 11.5px;
+      }
+    }
+    > i {
+      padding: 0;
+    }
   }
 }
 </style>

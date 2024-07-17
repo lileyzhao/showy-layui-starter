@@ -2,7 +2,7 @@
 import { useAppStore } from '@/store'
 import Logo from '@/layout/components/Logo.vue'
 import { MenuPositionEnum } from '@/shared'
-import { mapRoutesToElMenuItem } from '@/utils/menuUtil'
+import { mapRoutesToLayMenuItem } from '@/utils/menuUtil'
 import { getFullRoutes } from '@/utils'
 
 const props = defineProps({ parentMenuKey: { type: String, required: false } })
@@ -15,6 +15,7 @@ const fullRoutes = getFullRoutes()
 
 /** Selected Item in sub-menu 副栏菜单选中项 */
 const subMenuKey = ref<string | undefined>(route.name as string)
+const subMenuOpenKeys = ref([])
 
 const subMenuRoutes = computed(() => {
   return props.parentMenuKey ? fullRoutes.filter(r => r.meta.parentName === (props.parentMenuKey || route.matched[1].name)) : []
@@ -23,7 +24,7 @@ const subMenuRoutes = computed(() => {
 /** sub-menu items 副栏菜单项 */
 const subMenuItems = computed(() => {
   if ((!app.MenuSetting.subMenu.collapsed || app.MenuSetting.topMenu.showSubMenu) && subMenuRoutes.value.length > 0)
-    return fullRoutes.filter(route => route.meta.parentName === props.parentMenuKey).map(route => mapRoutesToElMenuItem(route, fullRoutes, t, true))
+    return fullRoutes.filter(route => route.meta.parentName === props.parentMenuKey).map(route => mapRoutesToLayMenuItem(route, fullRoutes, t, true))
   else return []
 })
 
@@ -74,11 +75,14 @@ defineExpose({ refreshSubMenu })
       </lay-header>
       <lay-body class="p-0!">
         <!-- Sub-menu 副栏菜单 -->
-        <el-menu v-if="subMenuKey" class="sub-menu" unique-opened :default-active="subMenuKey">
+        <lay-menu
+          v-if="subMenuKey" v-model:selectedKey="subMenuKey" v-model:open-keys="subMenuOpenKeys" class="sub-menu w-full!" theme="light"
+          :tree="true" indent
+        >
           <template #default>
             <component :is="menuItem" v-for="menuItem in subMenuItems" :key="menuItem.key" />
           </template>
-        </el-menu>
+        </lay-menu>
       </lay-body>
       <lay-footer class="h-auto! px-0!">
         <div h-8 w-full flex justify-right p-r-2>
@@ -93,14 +97,28 @@ defineExpose({ refreshSubMenu })
 </template>
 
 <style scoped lang="scss">
-:deep(.sub-menu.el-menu) {
-  --uno: 'b-r-none!';
+:deep(.sub-menu.layui-nav) {
+  .layui-nav-item > a {
+    padding: 0;
+    display: flex;
 
-  .el-menu-item {
-    --uno: 'p-r-0!';
+    span {
+      --uno: 'flex-1 m-0';
+      display: flex;
+      align-items: center;
+      padding-left: 23px;
+      a {
+        display: flex;
+        align-items: center;
+      }
 
-    a {
-      --uno: 'w-full';
+      span {
+        display: inline-block;
+        padding-left: 11.5px;
+      }
+    }
+    > i {
+      padding: 0;
     }
   }
 }
