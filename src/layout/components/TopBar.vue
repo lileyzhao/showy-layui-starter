@@ -63,6 +63,9 @@ const toggleThemeDrawer = () => {
 
 /** toggle language 切换语言 */
 const toggleLanguage = (lang: string) => {
+  if (typeof lang !== 'string')
+    lang = app.LocaleSetting.locale === 'zh_CN' ? 'en_US' : 'zh_CN'
+
   router.push({
     path: `/${lang.toLowerCase()}${route.path.replace(new RegExp(`^/${route.params.lang}/`, 'gi'), '/')}`,
     query: route.query,
